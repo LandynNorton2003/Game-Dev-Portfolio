@@ -1,0 +1,39 @@
+--Snippet of a round system
+local Status = game.ReplicatedStorage.Status
+local Teams = game:GetService("Teams")
+local num = 1
+while true do 
+	if #game.Players:GetChildren() > 1 then
+		num = math.random(1, #game.Players:GetChildren())
+	end
+	for i = 10, 0, -1 do
+		Status.Value = "Intermission: " .. i 
+		task.wait(1)
+	end
+	for i, Player in pairs(game.Players:GetPlayers()) do
+		local Char = Player.Character 
+		if Char then
+			local HumanoidRootPart = Char.HumanoidRootPart
+			Player.Team = game.Teams.Subjects
+			HumanoidRootPart.CFrame = game.Workspace.TeleportPoint.CFrame
+		end
+	end
+	local randPlayer = game.Players:GetChildren()[num]
+	print(randPlayer)
+	randPlayer.Team = game.Teams.Researcher
+	randPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.ResearcherTP.CFrame
+	
+	for i = 10, 0, -1 do
+		Status.Value = "Round: " ..i
+		task.wait(1)
+	end
+	for i, Player in pairs(game.Players:GetPlayers()) do
+		local Char = Player.Character 
+		if Char then
+			local HumanoidRootPart = Char.HumanoidRootPart
+			Player.Team = game.Teams.Subjects
+			HumanoidRootPart.CFrame = game.Workspace.TeleportPoint.CFrame
+		end
+	end
+end
+
